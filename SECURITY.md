@@ -7,7 +7,7 @@ Project supported by our security updates
 | Version | Supported          |
 | ------- | ------------------ |
 | 1.0.x   | :white_check_mark: |
-| < 1   | :x:                |
+| 1   | :x:                |
 
 ## Reporting a Vulnerability
 
