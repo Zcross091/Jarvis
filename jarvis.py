@@ -1,20 +1,17 @@
 import time
 import speech_recognition as sr
-import pyttsx3
+from gtts import gTTS
+import os
 import requests
 
 class Jarvis:
     def __init__(self):
         self.recognizer = sr.Recognizer()
-        self.engine = pyttsx3.init()
-        self.engine.setProperty("rate", 150)  # Adjust the speech rate (150 is a moderate speed)
-        self.engine.setProperty("volume", 100)  # Adjust the volume (1.0 is full volume)
-        self.api_key = 'your_openai_api_key_here'
-        self.wiki_api_key = 'your_wikipedia_api_key_here'
 
     def speak(self, text):
-        self.engine.say(text)
-        self.engine.runAndWait()
+        tts = gTTS(text=text, lang="en")
+        tts.save("output.mp3")
+        os.system("start output.mp3")
 
     def listen(self, timeout=None):
         with sr.Microphone() as source:
@@ -54,8 +51,6 @@ class Jarvis:
                     query = user_query.replace("search", "").strip()
                     self.search_wikipedia(query)
 
-            # Add more functions based on user queries as needed
-
     def search_wikipedia(self, query):
         endpoint = "https://en.wikipedia.org/w/api.php"
         params = {
@@ -83,8 +78,6 @@ class Jarvis:
         title = result["title"]
         snippet = result["snippet"]
         print(f"Search Result - Title: {title}\nSnippet: {snippet}")
-
-    # Add more functions as needed
 
 # Initialize and run Jarvis
 jarvis = Jarvis()
